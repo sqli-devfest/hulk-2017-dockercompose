@@ -1,0 +1,15 @@
+version: "3.1"
+services:
+  mqtt:
+    image: pascaldevink/rpi-mosquitto
+    ports:
+     - 1883:1883
+  tweetmodule:
+    image: devfest2017/tweetmodule:1.0
+    links:
+      - mqtt
+    environment:
+      - twitter_consumer_key
+      - twitter_consumer_secret
+      - twitter_access_token
+      - twitter_access_token_secret
