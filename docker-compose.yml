@@ -13,3 +13,11 @@ services:
       - twitter_consumer_secret
       - twitter_access_token
       - twitter_access_token_secret
+  soundmodule:
+    image: devfest2017/soundmodule:1.0
+    volumes:
+        - /opt/vc/lib:/opt/vc/lib
+    devices:
+        - /dev/snd
+    links:
+      - mqtt
