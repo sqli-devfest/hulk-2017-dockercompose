@@ -5,7 +5,7 @@ services:
     ports:
      - 1883:1883
   tweetmodule:
-    image: devfest2017/tweetmodule:1.0
+    image: hulkdevfest2017/tweetmodule:1.0
     links:
       - mqtt
     environment:
@@ -14,7 +14,7 @@ services:
       - twitter_access_token
       - twitter_access_token_secret
   soundmodule:
-    image: devfest2017/soundmodule:1.0
+    image: hulkdevfest2017/soundmodule:1.0
     volumes:
         - /opt/vc/lib:/opt/vc/lib
     devices:
