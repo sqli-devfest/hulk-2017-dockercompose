@@ -4,6 +4,10 @@ services:
     image: pascaldevink/rpi-mosquitto
     ports:
      - 1883:1883
+  mongo:
+    image: dhermanns/rpi-mongo
+    volumes:
+      - /var/mongo/data:/data
   tweetmodule:
     image: hulkdevfest2017/tweetmodule:1.0
     links:
@@ -16,8 +20,13 @@ services:
   soundmodule:
     image: hulkdevfest2017/soundmodule:1.0
     volumes:
-        - /opt/vc/lib:/opt/vc/lib
+      - /opt/vc/lib:/opt/vc/lib
     devices:
-        - /dev/snd
+      - /dev/snd
     links:
+      - mqtt
+  persistencemodule:
+    image: hulkdevfest2017/persistencemodule:1.0
+    links:
+      - mongo
       - mqtt
