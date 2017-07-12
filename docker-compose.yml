@@ -30,3 +30,7 @@ services:
     links:
       - mongo
       - mqtt
+  arduino-gateway:
+      image: hulkdevfest2017/arduino-gateway:1.0
+      links:
+        - mqtt
