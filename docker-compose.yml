@@ -4,10 +4,16 @@ services:
     image: pascaldevink/rpi-mosquitto
     ports:
      - 1883:1883
+  mongo-init:
+    image: nonoroazoro/rpi-mongo
+    links:
+      - mongo
+    command: mongo hulkdevfestgame --host mongo --eval "db.createCollection('results',{capped:true,size:10000})"
   mongo:
-    image: dhermanns/rpi-mongo
+    image: nonoroazoro/rpi-mongo
     volumes:
-      - /var/mongo/data:/data
+      - /var/mongo/data/db:/data/db
+      - /var/mongo/data/configdb:/data/configdb
   tweetmodule:
     image: hulkdevfest2017/tweetmodule:1.0
     links:
@@ -27,6 +33,16 @@ services:
       - mqtt
   persistencemodule:
     image: hulkdevfest2017/persistencemodule:1.0
+    depends_on:
+      - mongo-init
     links:
       - mongo
       - mqtt
+  resultsmodule:
+    image: hulkdevfest2017/resultsmodule:1.0
+    ports:
+      - 80:3100
+    depends_on:
+      - mongo-init
+    links:
+      - mongo
