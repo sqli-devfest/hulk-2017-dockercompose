@@ -46,3 +46,12 @@ services:
       - mongo-init
     links:
       - mongo
+  arduinogateway:
+    image: hulkdevfest2017/arduino-gateway:1.0
+    links:
+      - mqtt
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+      - "/dev/ttyUSB1:/dev/ttyUSB1"
+      - "/dev/ttyUSB2:/dev/ttyUSB3"
+      - "/dev/ttyUSB4:/dev/ttyUSB4"
