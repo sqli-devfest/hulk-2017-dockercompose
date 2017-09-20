@@ -3,7 +3,7 @@ services:
   mqtt:
     image: pascaldevink/rpi-mosquitto
     ports:
-     - 1883:1883
+     - "1883:1883"
   mongo-init:
     image: nonoroazoro/rpi-mongo
     links:
@@ -41,7 +41,7 @@ services:
   resultsmodule:
     image: hulkdevfest2017/resultsmodule:1.0
     ports:
-      - 80:3100
+      - "80:3100"
     depends_on:
       - mongo-init
     links:
