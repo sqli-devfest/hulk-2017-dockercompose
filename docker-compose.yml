@@ -52,4 +52,4 @@ services:
       - mqtt
     volumes:
       - "/dev:/dev/"
-    priviligied: true
+    privilegied: true
