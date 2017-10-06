@@ -50,6 +50,8 @@ services:
     image: hulkdevfest2017/arduino-gateway:1.0
     links:
       - mqtt
+    environnement:
+      - formule:score*4/100
     volumes:
       - "/dev:/dev/"
     privileged: true
