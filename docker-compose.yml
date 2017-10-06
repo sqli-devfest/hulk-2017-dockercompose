@@ -4,6 +4,7 @@ services:
     image: pascaldevink/rpi-mosquitto
     ports:
       - "1883:1883"
+    restart: always
   mongo-init:
     image: nonoroazoro/rpi-mongo
     links:
@@ -23,6 +24,7 @@ services:
       - twitter_consumer_secret
       - twitter_access_token
       - twitter_access_token_secret
+    restart: always
   soundmodule:
     image: hulkdevfest2017/soundmodule:1.0
     volumes:
@@ -38,6 +40,7 @@ services:
     links:
       - mongo
       - mqtt
+    restart: always
   resultsmodule:
     image: hulkdevfest2017/resultsmodule:1.0
     ports:
