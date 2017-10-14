@@ -3,8 +3,7 @@ services:
   mqtt:
     image: pascaldevink/rpi-mosquitto
     ports:
-      - "1883:1883"
-    restart: always
+     - 1883:1883
   mongo-init:
     image: nonoroazoro/rpi-mongo
     links:
@@ -13,8 +12,7 @@ services:
   mongo:
     image: nonoroazoro/rpi-mongo
     volumes:
-      - /var/mongo/data/db:/data/db
-      - /var/mongo/data/configdb:/data/configdb
+      - /var/mongo/data:/data
   tweetmodule:
     image: hulkdevfest2017/tweetmodule:1.0
     links:
@@ -24,8 +22,6 @@ services:
       - twitter_consumer_secret
       - twitter_access_token
       - twitter_access_token_secret
-      - config_type=dev
-    restart: always
   soundmodule:
     image: hulkdevfest2017/soundmodule:1.0
     volumes:
@@ -41,21 +37,18 @@ services:
     links:
       - mongo
       - mqtt
-    restart: always
+<<<<<<< HEAD
+=======
   resultsmodule:
     image: hulkdevfest2017/resultsmodule:1.0
     ports:
-      - "80:3100"
+      - 80:3100
     depends_on:
       - mongo-init
     links:
       - mongo
-  arduinogateway:
-    image: hulkdevfest2017/arduino-gateway:1.0
-    links:
-      - mqtt
-    environment:
-      - formule=score*4/100
-    volumes:
-      - "/dev:/dev/"
-    privileged: true
+  arduino-gateway:
+      image: hulkdevfest2017/arduino-gateway:1.0
+      links:
+        - mqtt
+>>>>>>> 534e60b... Added resultsmodule to docker-compose and a mongo-init container to create the capped collection needed by the tailable cursor

@@ -3,8 +3,7 @@ services:
   mqtt:
     image: pascaldevink/rpi-mosquitto
     ports:
-      - "1883:1883"
-    restart: always
+     - 1883:1883
   mongo-init:
     image: nonoroazoro/rpi-mongo
     links:
@@ -24,8 +23,6 @@ services:
       - twitter_consumer_secret
       - twitter_access_token
       - twitter_access_token_secret
-      - config_type=dev
-    restart: always
   soundmodule:
     image: hulkdevfest2017/soundmodule:1.0
     volumes:
@@ -41,21 +38,11 @@ services:
     links:
       - mongo
       - mqtt
-    restart: always
   resultsmodule:
     image: hulkdevfest2017/resultsmodule:1.0
     ports:
-      - "80:3100"
+      - 80:3100
     depends_on:
       - mongo-init
     links:
       - mongo
-  arduinogateway:
-    image: hulkdevfest2017/arduino-gateway:1.0
-    links:
-      - mqtt
-    environment:
-      - formule=score*4/100
-    volumes:
-      - "/dev:/dev/"
-    privileged: true
