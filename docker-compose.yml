@@ -55,7 +55,7 @@ services:
     links:
       - mqtt
     environment:
-      - formule=score*4/100
+      - formule=(((score-400)/500)*9)+1
     volumes:
       - "/dev:/dev/"
     privileged: true
